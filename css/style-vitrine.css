@@ -11,6 +11,10 @@ header {
     display: flex;
 }
 
+header form {
+    display: flex;
+}
+
 header #conta{
     width: 4rem;
     
@@ -30,6 +34,7 @@ main #produtos{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    
 }
 
 main #produtos #cards{
@@ -62,5 +67,4 @@ main #produtos #cards #descricao h3{
 
 main #produtos #cards #descricao #comprar{
     padding: 12px 28px;
-    
 }
