@@ -1,0 +1,66 @@
+body {
+    padding-top: 1vw;
+    max-width: 90vw;
+    margin-left: 5vw;
+}
+
+header {
+    max-height: 10vh;
+    justify-content: space-evenly;
+    align-items: center;
+    display: flex;
+}
+
+header #conta{
+    width: 4rem;
+    
+}
+
+header #logo{
+    max-height: 5rem;
+}
+
+
+main #titulo-menu{
+    text-align: center;
+    font-family: Helvetica;
+}
+
+main #produtos{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+main #produtos #cards{
+    min-width: 350px;
+    border: 1px solid #606d80;
+    padding: 5px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main #produtos #cards #descricao{
+    height: 100px;
+    width: 100%;
+    max-width: 300px;
+    border: 1px solid #606d80;
+    padding: 10px;
+    margin: 5px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+main #produtos #cards #descricao h3{
+    font-family: Helvetica;
+    margin: 0;
+}
+
+main #produtos #cards #descricao #comprar{
+    padding: 12px 28px;
+    
+}
