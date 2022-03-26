@@ -1,16 +1,18 @@
 /* vitrine */
 
 body {
-    padding-top: 1vw;
-    max-width: 90vw;
-    margin-left: 5vw;
+    background-color: lightgray;
 }
 
 header {
     max-height: 10vh;
+    width: 100%;
     justify-content: space-evenly;
     align-items: center;
     display: flex;
+    box-shadow: 0px 0px 8px #000;
+    padding: 15px 0px 15px;
+    background-color: #fff
 }
 
 header form {
@@ -26,10 +28,16 @@ header #logo{
     max-height: 4rem;
 }
 
+main #nav{
+    margin-top: 20px;
+    justify-content: center;
+}
 
 main #titulo-menu{
     text-align: center;
     font-family: Helvetica;
+    margin: 30px 0px 30px;
+    box-shadow: 0px 1.5px 0px #000; 
 }
 
 main #produtos{
@@ -41,25 +49,32 @@ main #produtos{
 
 main #produtos #cards{
     min-width: 350px;
-    border: 1px solid #606d80;
+    /*border: 1px solid #606d80;*/
     padding: 5px;
     margin: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-radius: 5%;
+    background-color: rgba(0,0,0, 0.1);
+}
+
+main #produtos #cards:hover{
+    box-shadow: 2px 2px 5px #000;
 }
 
 main #produtos #cards #descricao{
-    height: 100px;
+    height: 130px;
     width: 100%;
     max-width: 300px;
-    border: 1px solid #606d80;
+    /*border: 1px solid #606d80;*/
     padding: 10px;
     margin: 5px;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border-radius: 5%;
 }
 
 main #produtos #cards #descricao h3{
@@ -67,13 +82,22 @@ main #produtos #cards #descricao h3{
     margin: 0;
 }
 
-main #produtos #cards #descricao #comprar{
-    padding: 12px 28px;
-}
-
 
 /* descricao do produto */
 
-main #detalhe{
+#main-detalhe{
+    display: flex;
     justify-content: center;
+    min-height: 90vh;
+    align-items: center;
+}
+
+main #detalhe{
+    min-height: 70vh;
+    min-width: 70vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(0,0,0, 0.1);
+    padding: 3%;
 }
