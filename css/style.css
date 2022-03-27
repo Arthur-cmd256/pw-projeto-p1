@@ -19,18 +19,14 @@ header form {
     display: flex;
 }
 
-header #conta{
-    width: 4rem;
-    
+header #cesta-conta{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 header #logo{
     max-height: 4rem;
-}
-
-main #nav{
-    margin-top: 20px;
-    justify-content: center;
 }
 
 main #titulo-menu{
@@ -38,6 +34,8 @@ main #titulo-menu{
     font-family: Helvetica;
     margin: 30px 0px 30px;
     box-shadow: 0px 1.5px 0px #000; 
+    display: flex;
+    justify-content: center;
 }
 
 main #produtos{
@@ -94,10 +92,117 @@ main #produtos #cards #descricao h3{
 
 main #detalhe{
     min-height: 70vh;
-    min-width: 70vw;
+    min-width: 80vw;
+    margin: 0vw 10vw 0vw 10vw;
     display: flex;
     justify-content: space-around;
     align-items: center;
     background-color: rgba(0,0,0, 0.1);
     padding: 3%;
+    border-radius: 3%;
+    flex-wrap: wrap;
+}
+
+main #carousel{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 350px;
+    width: 50%;
+    float: left;
+    text-align: center;
+    padding: 2%;
+}
+
+main #carousel .meu-carousel {
+    margin-top: 3%;
+    display: flex;
+    justify-content: center;
+}
+
+main #carousel .meu-carousel img{
+    width: 70px;
+    margin: 5px;
+    padding: 7px;
+    background-color: rgba(0,0,0, 0.1);
+    border-radius: 10%;
+}
+
+main #detalhe #titulo-descricao {
+    text-align: justify;
+    
+}
+
+main #detalhe #titulo-descricao #descricao-produto{
+    margin-top: 10%;
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+main #detalhe #titulo-descricao #descricao-produto #texto-descricao{
+    margin-top: 1.5%;
+}  
+
+main #detalhe #titulo-descricao #descricao-produto #comprar-detalhe{
+    margin-top: 7%;
+}
+
+/* cesta */
+
+main #espaco-cesta{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 90vw;
+    margin: 5vh 5vw;
+
+}
+/*login*/
+main #espaco-login{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 90vw;
+    margin: 5vh 5vw;
+    background-color: rgba(0,0,0, 0.1);
+    min-width: 350px;
+}
+
+main #espaco-login #entrar{
+    width: 50%;
+    padding: 5% 5% 5% 5%;
+    justify-content: center;
+    background-color: rgba(0,0,0, 0.1);
+}
+
+main #espaco-login #cadastrar{
+    width: 50%;
+    padding: 5% 5% 5% 5%;
+}
+
+/*cadastro*/
+
+main #espaco-cadastro{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 90vw;
+    margin: 5vh 5vw;
+    background-color: rgba(0,0,0, 0.1);
+}
+
+main #espaco-cadastro #cadastro-cadastrar{
+    width: 100%;
+    padding: 5% 5% 5% 5%;
+}
+
+main #espaco-esqueci{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 90vw;
+    margin: 5vh 5vw;
+    background-color: rgba(0,0,0, 0.1);
+}
+
+main #espaco-esqueci #esqueci-senha{
+    width: 100%;
+    padding: 5% 15% 5% 15%;
 }
