@@ -50,7 +50,7 @@
                         <label>Digite o seu e-mail cadastrado:</label>
                         <input id="email" type="email" class="form-control" name="Email" placeholder="Digite o seu email">
                         <label></label><br/>
-                        <button type="button" class="btn btn-secondary">Enviar</button>               
+                        <button type="button" class="btn btn-secondary" onclick="esqueci();" >Enviar</button>               
                     </form>
                 </div>
             </div>
@@ -58,3 +58,16 @@
         </main>
     </body>
 </html>
+
+<script lang="javascript">
+    function esqueci(){
+
+        if(email.value.length<6 || email.value.indexOf("@") <=0 || email.value.lastIndexOf(".") <=email.value.indexOf("@")  ){
+            alert("Informe um email valido !!");
+            email.focus();
+            return false;
+        }
+
+        alert("Enviamos a você um email com um link para concluir a redefinição de sua senha.\nNão localizou o email? Verifique sua pasta de spam.\nCaso ainda não consiga fazer login, reenvie-nos o email !!!!");
+}    
+</script>

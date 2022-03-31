@@ -47,12 +47,12 @@
                     <h4>Entrar</h4></br>
                     <form>
                         <label>E-mail</label>
-                        <input id="email" type="email" class="form-control" name="Email" placeholder="Digite o seu email"></br>
+                        <input id="email" type="email" class="form-control" name="email" placeholder="Digite o seu email"></br>
                         <label>Senha</label>
-                        <input id="senha" type="password" class="form-control" placeholder="Digite sua senha">
+                        <input id="senha" type="password" class="form-control" name="senha"placeholder="Digite sua senha">
                         <p>Esqueci minha senha, <a href="esqueci.html">clique aqui  </a>  </p>
                         <label></label><br>
-                        <button type="button" class="btn btn-secondary">Entrar</button></br>
+                        <button type="button" class="btn btn-secondary" onclick="login();"cpf()>Entrar</button></br>
                     </form>
                 </div>
                 <div id="cadastrar">
@@ -65,3 +65,22 @@
         </main>
     </body>
 </html>
+
+<script lang="javascript">
+    function login(){
+
+        if(email.value.length<6 || email.value.indexOf("@") <=0 || email.value.lastIndexOf(".") <=email.value.indexOf("@")  ){
+            alert("Informe um e-mail válido!!");
+            email.focus();
+            return false;
+        }
+
+        if(document.getElementById("senha").value.length === 0){
+        alert('Por favor, preencha sua senha');
+        document.getElementById("senha").focus();
+        return false
+        }
+        
+        alert("tudo certo!!!!");
+    }    
+</script>
