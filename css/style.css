@@ -106,7 +106,7 @@ main #detalhe{
     justify-content: space-around;
     align-items: center;
     background-color: rgba(0,0,0, 0.1);
-    padding: 3%;
+    padding: 1%;
     border-radius: 3%;
     flex-wrap: wrap;
     margin: 40px 20px 40px 20px;
@@ -120,7 +120,8 @@ main #carousel{
     width: 50%;
     float: left;
     text-align: center;
-    padding: 2%;
+    padding: 2%;    
+    border-radius: 2%;
 }
 
 main #carousel .meu-carousel {
@@ -138,8 +139,14 @@ main #carousel .meu-carousel img{
 }
 
 main #detalhe #titulo-descricao {
-    text-align: justify;
-    
+    text-align: left;
+    background-color: rgba(0,0,0, 0.1);
+    padding: 3% 3% 3% 3%;
+    border-radius: 3%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    max-width: 800px;
 }
 
 main #detalhe #titulo-descricao #descricao-produto{
@@ -147,6 +154,12 @@ main #detalhe #titulo-descricao #descricao-produto{
     display: flex;
     flex-wrap: wrap;
     
+}
+
+main #detalhe #titulo-descricao #descricao-produto{
+    background-color: rgba(0,0,0, 0.1);
+    padding: 3% 3% 3% 3%;
+    border-radius: 3%;
 }
 
 main #detalhe #titulo-descricao #descricao-produto #texto-descricao{
@@ -173,6 +186,7 @@ main #espaco-login{
     max-width: 90vw;
     margin: 5vh 5vw;
     background-color: rgba(0,0,0, 0.1);
+    border-radius: 3%;
     min-width: 350px;
 }
 
@@ -181,11 +195,21 @@ main #espaco-login #entrar{
     padding: 5% 5% 5% 5%;
     justify-content: center;
     background-color: rgba(0,0,0, 0.1);
+    border-radius: 3%;
 }
 
 main #espaco-login #cadastrar{
     width: 50%;
     padding: 5% 5% 5% 5%;
+}
+
+@media screen and (max-width: 650px) and (min-width: 0px){
+    main #espaco-login #entrar{
+        width: 100%;
+    }
+    main #espaco-login #cadastrar{
+        width: 100%;
+    }
 }
 
 /*cadastro*/
@@ -196,6 +220,7 @@ main #espaco-cadastro{
     max-width: 90vw;
     margin: 5vh 5vw;
     background-color: rgba(0,0,0, 0.1);
+    border-radius: 3%;
 }
 
 main #espaco-cadastro #cadastro-cadastrar{
@@ -209,6 +234,7 @@ main #espaco-esqueci{
     max-width: 90vw;
     margin: 5vh 5vw;
     background-color: rgba(0,0,0, 0.1);
+    border-radius: 3%;
 }
 
 main #espaco-esqueci #esqueci-senha{
