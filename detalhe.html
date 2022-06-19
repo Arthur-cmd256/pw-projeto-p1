@@ -61,7 +61,7 @@
 
             const id = url.split("=")[1];
 
-            const response = await fetch('http://localhost:7777/produto/' + id);
+            const response = await fetch('https://pwprojetoback-end.herokuapp.com/produto/' + id);
             //console.log(response);
             const data = await response.json();
 
