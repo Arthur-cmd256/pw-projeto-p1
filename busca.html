@@ -16,12 +16,10 @@
             <a href="index.html">
                 <img id="logo" src="./imagens/logoVenenoBW.png" title="Veneno Auto Peças">
             </a>
-            <form>
+            <div>
                 <input id="busca" class="form-control" type="text" name="busca" placeholder="Busca">
-                <a href="busca.html">
-                    <button id="button-busca" class="btn btn-secondary" type="button" title="Buscar">OK</button>
-                </a>
-            </form>
+                <button id="button-busca" class="btn btn-secondary" type="button" title="Buscar" onclick="getBusca()" >OK</button>
+            </div>
             <div id="cesta-conta">
                 <a href="cesta.html">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="gray" class="bi bi-basket2-fill" viewBox="0 0 16 16">
@@ -36,38 +34,83 @@
             </div>
         </header>
         <main>
-            <h3 id="titulo-menu">
-                Pesquisa por:&nbsp
-                <form>
-                    <label>Filtro de Oleo</label>
-                </form>
-                <hr>
-            </h3>
-
-            <div id="produtos">
-                <div id="cards" >
-                    <a href="detalhe.html">
-                        <img id="imagem-produto" src="./imagens/filtro-oleo-1.png" alt="">
-                    </a>
-                    <div id="descricao">
-                        <h4>Filtro Oleo Do Motor 1.0 Corsa Classic 2012 2013 2014</h4>
-                        <button id="comprar" class="btn btn-secondary">
-                            Comprar agora
-                        </button>
-                    </div>
-                </div>
-                <div id="cards" >
-                    <a href="detalhe.html">
-                        <img id="imagem-produto" src="./imagens/filtro-oleo-1.png" alt="">
-                    </a>
-                    <div id="descricao">
-                        <h4>Filtro Oleo Do Motor 1.0 Corsa Classic 2012 2013 2014</h4>
-                        <button id="comprar" class="btn btn-secondary">
-                            Comprar agora
-                        </button>
-                    </div>
-                </div>
-            </div>
         </main>
     </body>
 </html>
+
+<script>
+
+    async function getProdutos() {
+
+        try {
+            const url = window.location.href;
+
+            const name = url.split("=")[1];
+            document.querySelector('main').innerHTML = `
+            <h3 id="titulo-menu">
+                Pesquisa por: ${name}
+                <hr>
+            </h3>
+            <div id="produtos"></div>
+            `;
+            const response = await fetch('http://localhost:7777/produto/busca/' + name);
+            //console.log(response);
+            const data = await response.json();
+
+            console.log(data.length);
+
+            if (!data.length == 0) {
+                show(data);
+                } else {
+                    document.querySelector('#produtos').innerHTML = `
+                            <p>Nenhum produto encontrado</p>
+                    `;
+                }
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    getProdutos();
+
+    function show(produtos) {
+
+        let output = ``;
+
+        for (let produto of produtos){
+            const { ind_destaque, img_produto } = produto;
+            const img = img_produto.split("|")[0];
+                output += ` 
+                    <div id="cards" >
+                    <a href="detalhe.html?id=${produto._id}">
+                        <img id="imagem-produto" src="${img}" alt="">
+                    </a>
+                    <div id="descricao">
+                        <h4>${produto.nom_produto}</h4>
+                        <button id="comprar" class="btn btn-secondary">
+                            Comprar agora
+                        </button>
+                    </div>
+                </div>
+                `;
+        }
+
+        document.querySelector('#produtos').innerHTML = output;
+    }
+
+    var busca = document.getElementById('busca');
+
+    busca.addEventListener("keypress", function(evento){
+        if (evento.keyCode == 13){
+            getBusca();
+        }
+    });
+
+
+    function getBusca() {
+        const busca = document.querySelector('#busca').value;
+        window.location.href = `busca.html?name=${busca}`;
+    }
+
+</script>

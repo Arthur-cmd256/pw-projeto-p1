@@ -20,12 +20,10 @@
             <a href="index.html">
                 <img id="logo" src="./imagens/logoVenenoBW.png" title="Veneno Auto Peças">
             </a>
-            <form>
+            <div>
                 <input id="busca" class="form-control" type="text" name="busca" placeholder="Busca">
-                <a href="busca.html">
-                    <button id="button-busca" class="btn btn-secondary" type="button" title="Buscar">OK</button>
-                </a>
-            </form>
+                <button id="button-busca" class="btn btn-secondary" type="button" title="Buscar" onclick="getBusca()" >OK</button>
+            </div>
             <div id="cesta-conta">
                 <a href="cesta.html">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="gray" class="bi bi-basket2-fill" viewBox="0 0 16 16">
@@ -90,6 +88,20 @@
         }
 
         document.querySelector('#produtos').innerHTML = output;
+    }
+
+    var busca = document.getElementById('busca');
+
+    busca.addEventListener("keypress", function(evento){
+        if (evento.keyCode == 13){
+            getBusca();
+        }
+    });
+
+
+    function getBusca() {
+        const busca = document.querySelector('#busca').value;
+        window.location.href = `busca.html?name=${busca}`;
     }
 
 </script>
