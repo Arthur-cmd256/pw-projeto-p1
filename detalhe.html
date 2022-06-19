@@ -46,70 +46,100 @@
         </div>
     </header>
     <main id="main-detalhe">
-        <div id="detalhe">
+        
 
-            <div id="carousel">
-
-                <div id="demo" class="carousel slide" data-bs-ride="carousel">
-
-                    <!-- The slideshow/carousel -->
-                    <div class="carousel-inner">
-                        <div id="imagens-carousel" class="carousel-item active">
-                            <img src="./imagens/filtro-oleo-1.png" class="rounded mx-auto d-block" style="width:50%">
-                        </div>
-                        <div id="imagens-carousel" class="carousel-item">
-                            <img src="./imagens/filtro-oleo-2.png" class="rounded mx-auto d-block" style="width:50%">
-                        </div>
-                        <div id="imagens-carousel" class="carousel-item">
-                            <img src="./imagens/filto-oleo-3.png" class="rounded mx-auto d-block" style="width:50%">
-                        </div>
-                    </div>
-
-                    <!-- Left and right controls/icons -->
-                    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </button>
-
-                </div>
-
-                <div class="meu-carousel">
-                    <img src="./imagens/filtro-oleo-1.png" data-bs-target="#demo" data-bs-slide-to="0" class="active">
-                    <img src="./imagens/filtro-oleo-2.png" data-bs-target="#demo" data-bs-slide-to="1">
-                    <img src="./imagens/filto-oleo-3.png" data-bs-target="#demo" data-bs-slide-to="2">
-                </div>
-
-            </div><br />
-
-            <div id="titulo-descricao">
-                <br />
-                <h2>Filtro Oléo Do Motor 1.0 Corsa Classic 2012 2013 2014</h2><br />
-                <h1>R$ 40,40</h1>
-                <p>em 12x de R$ 8,74 pagando com Cartão Crédito</p>
-                <a href="">
-                    <p>Ver metodos de pagamento</p>
-                </a>
-                <div>
-                    <p>Quantidade em estoque: 100 unid.</p>
-                </div>
-                <div>
-                    <button id="comprar-detalhe" class="btn btn-secondary">Comprar agora</button>
-                    <button id="comprar-detalhe" class="btn btn-light">Adicionar ao carrinho</button>
-                </div>
-
-                <div id="descricao-produto">
-                    <form action="">
-                        <h5>DESCRIÇÃO:</h5>
-                        <p id="texto-descricao">88905845 Filtro de Oleo do Motor (Para Motores GM 1.0 / 1.4 / 1.6 / 1.8
-                            / 2.0 / 2.2 / 2.4)</p>
-                    </form>
-                </div>
-            </div>
-        </div>
 
     </main>
 </body>
 
 </html>
+
+<script>
+
+    async function getProdutos() {
+
+        try {
+            const url = window.location.href;
+
+            const id = url.split("=")[1];
+
+            const response = await fetch('http://localhost:7777/produto/' + id);
+            //console.log(response);
+            const data = await response.json();
+
+            //console.log(data);
+            show(data);
+        } catch (error) {
+            console.log('errooouuuu');
+        }
+    }
+
+    getProdutos();
+
+    function show(produto) {
+
+        const { nom_produto, des_produto, val_produto, qtd_produto, img_produto, cat_produto, ind_destaque } = produto;
+        
+        output = `<div id="detalhe">
+                        <div id="carousel">
+                            <div id="demo" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div id="imagens-carousel" class="carousel-item active">
+                                        <img src="${img_produto}" class="rounded mx-auto d-block" style="width:50%">
+                                    </div>
+                                    <div id="imagens-carousel" class="carousel-item">
+                                        <img src="./imagens/filtro-oleo-2.png" class="rounded mx-auto d-block" style="width:50%">
+                                    </div>
+                                    <div id="imagens-carousel" class="carousel-item">
+                                        <img src="./imagens/filto-oleo-3.png" class="rounded mx-auto d-block" style="width:50%">
+                                    </div>
+                                </div>
+
+                                <!-- Left and right controls/icons -->
+                                <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon"></span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon"></span>
+                                </button>
+
+                            </div>
+
+                            <div class="meu-carousel">
+                                <img src="${img_produto}" data-bs-target="#demo" data-bs-slide-to="0" class="active">
+                                <img src="./imagens/filtro-oleo-2.png" data-bs-target="#demo" data-bs-slide-to="1">
+                                <img src="./imagens/filto-oleo-3.png" data-bs-target="#demo" data-bs-slide-to="2">
+                            </div>
+
+                        </div><br />
+
+                        <div id="titulo-descricao">
+                            <br />
+                            <p>Categoria: ${cat_produto}</p>
+                            <h2>${nom_produto}</h2><br />
+                            <h1>R$ ${val_produto}</h1>
+                            <p>em 12x de R$ ${val_produto} pagando com Cartão Crédito</p>
+                            <a href="">
+                                <p>Ver metodos de pagamento</p>
+                            </a>
+                            <div>
+                                <p>Quantidade em estoque: ${qtd_produto} unid.</p>
+                            </div>
+                            <div>
+                                <button id="comprar-detalhe" class="btn btn-secondary">Comprar agora</button>
+                                <button id="comprar-detalhe" class="btn btn-light">Adicionar ao carrinho</button>
+                            </div>
+
+                            <div id="descricao-produto">
+                                <form action="">
+                                    <h5>DESCRIÇÃO:</h5>
+                                    <p id="texto-descricao">${des_produto}</p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>`;
+
+        document.querySelector('main').innerHTML = output;
+    }
+
+</script>

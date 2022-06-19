@@ -75,7 +75,7 @@
             const { ind_destaque } = produto;
             if (ind_destaque){
                 output += `<div id="cards" >
-                    <a href="detalhe.html">
+                    <a href="detalhe.html?id=${produto._id}">
                         <img id="imagem-produto" src="${produto.img_produto}" alt="">
                     </a>
                     <div id="descricao">
