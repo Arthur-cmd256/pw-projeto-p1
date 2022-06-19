@@ -79,19 +79,24 @@
     function show(produto) {
 
         const { nom_produto, des_produto, val_produto, qtd_produto, img_produto, cat_produto, ind_destaque } = produto;
-        
+        const img = img_produto.split("|");
+        const val = String(val_produto).split(".");
+
+        if (val[1] === undefined) {
+            val[1] = "00";
+        }
         output = `<div id="detalhe">
                         <div id="carousel">
                             <div id="demo" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-inner">
                                     <div id="imagens-carousel" class="carousel-item active">
-                                        <img src="${img_produto}" class="rounded mx-auto d-block" style="width:50%">
+                                        <img src="${img[0]}" class="rounded mx-auto d-block" style="width:50%">
                                     </div>
                                     <div id="imagens-carousel" class="carousel-item">
-                                        <img src="./imagens/filtro-oleo-2.png" class="rounded mx-auto d-block" style="width:50%">
+                                        <img src="${img[1]}" class="rounded mx-auto d-block" style="width:50%">
                                     </div>
                                     <div id="imagens-carousel" class="carousel-item">
-                                        <img src="./imagens/filto-oleo-3.png" class="rounded mx-auto d-block" style="width:50%">
+                                        <img src="${img[2]}" class="rounded mx-auto d-block" style="width:50%">
                                     </div>
                                 </div>
 
@@ -106,9 +111,9 @@
                             </div>
 
                             <div class="meu-carousel">
-                                <img src="${img_produto}" data-bs-target="#demo" data-bs-slide-to="0" class="active">
-                                <img src="./imagens/filtro-oleo-2.png" data-bs-target="#demo" data-bs-slide-to="1">
-                                <img src="./imagens/filto-oleo-3.png" data-bs-target="#demo" data-bs-slide-to="2">
+                                <img src="${img[0]}" data-bs-target="#demo" data-bs-slide-to="0" class="active">
+                                <img src="${img[1]}" data-bs-target="#demo" data-bs-slide-to="1">
+                                <img src="${img[2]}" data-bs-target="#demo" data-bs-slide-to="2">
                             </div>
 
                         </div><br />
@@ -117,8 +122,8 @@
                             <br />
                             <p>Categoria: ${cat_produto}</p>
                             <h2>${nom_produto}</h2><br />
-                            <h1>R$ ${val_produto}</h1>
-                            <p>em 12x de R$ ${val_produto} pagando com Cartão Crédito</p>
+                            <h1>R$ ${val[0]},${val[1]}</h1>
+                            <p>em 12x de R$ ${val[0]},${val[1]} pagando com Cartão Crédito</p>
                             <a href="">
                                 <p>Ver metodos de pagamento</p>
                             </a>

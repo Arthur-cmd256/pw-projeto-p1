@@ -72,11 +72,12 @@
         let output = ``;
 
         for (let produto of produtos){
-            const { ind_destaque } = produto;
+            const { ind_destaque, img_produto } = produto;
+            const img = img_produto.split("|")[0];
             if (ind_destaque){
                 output += `<div id="cards" >
                     <a href="detalhe.html?id=${produto._id}">
-                        <img id="imagem-produto" src="${produto.img_produto}" alt="">
+                        <img id="imagem-produto" src="${img}" alt="">
                     </a>
                     <div id="descricao">
                         <h4>${produto.nom_produto}</h4>
