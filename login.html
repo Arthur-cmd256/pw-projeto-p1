@@ -14,7 +14,7 @@
 </head>
     <body>
         <header>
-            <a href="index.html">
+            <a onclick="home()">
                 <img id="logo" src="./imagens/logoVenenoBW.png" title="Veneno Auto Peças">
             </a>
             <div>
@@ -22,14 +22,9 @@
                 <button id="button-busca" class="btn btn-secondary" type="button" title="Buscar" onclick="getBusca()" >OK</button>
             </div>
             <div id="cesta-conta">
-                <a href="cesta.html">
+                <a onclick="cesta()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="gray" class="bi bi-basket2-fill" viewBox="0 0 16 16">
                         <path d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1z"/>
-                    </svg>
-                </a>
-                <a href="login.html">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="gray" class="bi bi-person" viewBox="0 0 16 16">
-                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                     </svg>
                 </a>
             </div>
@@ -50,13 +45,13 @@
                         <input type="password" id="des_senha" class="form-control" placeholder="Digite sua senha">
                         <p>Esqueci minha senha, <a href="esqueci.html">clique aqui </a> </p>
                         <label></label><br>
-                        <button type="button" class="btn btn-secondary" onclick="login();"cpf()>Entrar</button></br>
+                        <button type="button" class="btn btn-secondary" onclick="login()"cpf()>Entrar</button></br>
                     </form>
                 </div>
                 <div id="cadastrar">
                     <form>
                         <h4>Ainda não tenho cadastro</h4></br> 
-                        <a href="cadastro.html"><button type="button" class="btn btn-secondary">Clique aqui para se cadastrar</button></a></br>
+                        <button type="button" class="btn btn-secondary" onclick="cadastrar()">Clique aqui para se cadastrar</button></br>
                     </form>
                 </div>
             </div>
@@ -65,9 +60,10 @@
 </html>
 
 <script lang="javascript">
+    
     function login(){
 
-        const email = document.getElementById("des_email").value;
+        const email = document.getElementById("des_emaill").value;
         const senha = document.getElementById("des_senha").value;
 
         if(email.length<6 || email.indexOf("@") <=0 || email.lastIndexOf(".") <=email.indexOf("@")  ){
@@ -83,15 +79,13 @@
         }
 
         $.post( "https://pwprojetoback-end.herokuapp.com/cliente/login", { des_email : email, des_senha : senha } ).then(function(data) {
-            if(data.status == "ok"){
-                alert("Cadastro realizado com sucesso!!!");
+            if(data.status === "ok"){
+                alert("Login realizado com sucesso!!!");
                 const token = data.token;
                 window.location.href = "index.html?token="+token;
-            }else{
-                alert("Erro ao realizar o cadastro!!!");
             }
         }).catch(function(error) {
-            console.log(error);
+            alert("Erro ao realizar o logar!!!");
         });
         
     }
@@ -106,7 +100,26 @@
 
     function getBusca() {
         const busca = document.querySelector('#busca').value;
-        window.location.href = `busca.html?name=${busca}`;
+        window.location.href = `busca.html?name=${busca}&token=${token}`;
+    }
+
+    function cesta () {
+
+        if (token !== undefined) {
+            window.location.href = "cesta.html?token="+token;
+        } else {
+            alert("Para acessar a cesta, você precisa estar logado!");
+            window.location.href = "login.html";
+        }
+
+    }
+
+    function home () {
+        window.location.href = "index.html"+"?token="+token;
+    }
+
+    function cadastrar () {
+        window.location.href = "cadastro.html";
     }
 
 </script>
