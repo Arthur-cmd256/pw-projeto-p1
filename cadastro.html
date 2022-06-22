@@ -91,7 +91,7 @@
                             </div>
                             <div class="col mx-1">
                                 <div class="row">
-                                    <label>Confirmação de senha</label>
+                                    <label>Confirmação:</label>
                                 </div >
                                 <div class="row">
                                     <input type="password" id="des_senha" class="form-control col-6" placeholder="Confirme sua senha" required >
@@ -162,7 +162,7 @@
             return false;
         }
 
-        $.post( "http://localhost:7777/cliente/cadastro", {nom_cliente : nome, num_cpf : cpf, des_email : email, des_senha : senha, des_endereco : endereco, num_telefone : telefone } ).then(function(data) {
+        $.post( "https://pwprojetoback-end.herokuapp.com/produto/cliente/cadastro", {nom_cliente : nome, num_cpf : cpf, des_email : email, des_senha : senha, des_endereco : endereco, num_telefone : telefone } ).then(function(data) {
             if(data.status == "ok"){
                 alert("Cadastro realizado com sucesso!!!");
                 window.location.href = "login.html";
