@@ -85,7 +85,8 @@
         $.post( "https://pwprojetoback-end.herokuapp.com/cliente/login", { des_email : email, des_senha : senha } ).then(function(data) {
             if(data.status == "ok"){
                 alert("Cadastro realizado com sucesso!!!");
-                window.location.href = "index.html";
+                const token = data.token;
+                window.location.href = "index.html?token="+token;
             }else{
                 alert("Erro ao realizar o cadastro!!!");
             }
