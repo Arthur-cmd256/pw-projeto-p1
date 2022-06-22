@@ -162,7 +162,7 @@
             return false;
         }
 
-        $.post( "https://pwprojetoback-end.herokuapp.com/produto/cliente/cadastro", {nom_cliente : nome, num_cpf : cpf, des_email : email, des_senha : senha, des_endereco : endereco, num_telefone : telefone } ).then(function(data) {
+        $.post( "https://pwprojetoback-end.herokuapp.com/cliente/cadastro", {nom_cliente : nome, num_cpf : cpf, des_email : email, des_senha : senha, des_endereco : endereco, num_telefone : telefone } ).then(function(data) {
             if(data.status == "ok"){
                 alert("Cadastro realizado com sucesso!!!");
                 window.location.href = "login.html";
