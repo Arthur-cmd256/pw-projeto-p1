@@ -5,7 +5,7 @@
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    
+    <script src="jquery-3.6.0.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,10 +45,10 @@
                     <h4>Entrar</h4></br>
                     <form>
                         <label>E-mail</label>
-                        <input id="email" type="email" class="form-control" name="email" placeholder="Digite o seu email"></br>
+                        <input type="des_email" id="email" class="form-control" placeholder="Digite o seu email"></br>
                         <label>Senha</label>
-                        <input id="senha" type="password" class="form-control" name="senha"placeholder="Digite sua senha">
-                        <p>Esqueci minha senha, <a href="esqueci.html">clique aqui  </a>  </p>
+                        <input type="des_senha" id="senha" class="form-control" placeholder="Digite sua senha">
+                        <p>Esqueci minha senha, <a href="esqueci.html">clique aqui </a> </p>
                         <label></label><br>
                         <button type="button" class="btn btn-secondary" onclick="login();"cpf()>Entrar</button></br>
                     </form>
@@ -67,19 +67,32 @@
 <script lang="javascript">
     function login(){
 
-        if(email.value.length<6 || email.value.indexOf("@") <=0 || email.value.lastIndexOf(".") <=email.value.indexOf("@")  ){
+        const email = document.getElementById("des_email").value;
+        const senha = document.getElementById("des_senha").value;
+
+        if(email.length<6 || email.indexOf("@") <=0 || email.lastIndexOf(".") <=email.indexOf("@")  ){
             alert("Informe um e-mail válido!!");
             email.focus();
             return false;
         }
 
-        if(document.getElementById("senha").value.length === 0){
+        if(senha.length === 0){
         alert('Por favor, preencha sua senha');
-        document.getElementById("senha").focus();
+        senha.focus();
         return false
         }
+
+        $.post( "https://pwprojetoback-end.herokuapp.com/cliente/login", { des_email : email, des_senha : senha } ).then(function(data) {
+            if(data.status == "ok"){
+                alert("Cadastro realizado com sucesso!!!");
+                window.location.href = "index.html";
+            }else{
+                alert("Erro ao realizar o cadastro!!!");
+            }
+        }).catch(function(error) {
+            console.log(error);
+        });
         
-        alert("tudo certo!!!!");
     }
     
     var busca = document.getElementById('busca');
@@ -89,7 +102,6 @@
             getBusca();
         }
     });
-
 
     function getBusca() {
         const busca = document.querySelector('#busca').value;
