@@ -47,8 +47,14 @@
                     <form>
                         <label>Digite o seu e-mail cadastrado:</label>
                         <input type="email" id="des_email" class="form-control" placeholder="Digite o seu email">
+                        <label>Digite o token enviado:</label>
+                        <input type="txt" id="rec_token" class="form-control" placeholder="Digite o token enviado por e-mail">
+                        <label>Digite a nova senha:</label>
+                        <input type="password" id="senha1" class="form-control col-6" placeholder="Crie uma senha" required >
+                        <label>Confirme a nova senha:</label>
+                        <input type="password" id="des_senha" class="form-control col-6" placeholder="Confirme sua senha" required >
                         <label></label><br/>
-                        <button type="button" class="btn btn-secondary" onclick="esqueci();" >Enviar</button>               
+                        <button type="button" class="btn btn-secondary" onclick="alterar();" >Enviar</button>               
                     </form>
                 </div>
             </div>
@@ -63,23 +69,36 @@
 
     
 
-    function esqueci(){
+    function alterar(){
 
         const email = document.getElementById("des_email").value;
+        const token = document.getElementById("rec_token").value;
+        const senha = document.getElementById("des_senha").value;
+        const senhaConfirmacao = document.getElementById("senha1").value;
 
         if(email.length < 6 || email.indexOf("@") <=0 || email.lastIndexOf(".") <= email.indexOf("@")  ){
             alert("informe um email valido!!");
             des_email.focus();
             return false;
         }
+        if(senhaConfirmacao.length < 5 || isNaN(senhaConfirmacao)){
+            alert("Informe uma senha alfanumerica de no minimo 6 caracteres!!!");
+            senha1.focus();
+            return false;
+        }
+        if(senha!=senhaConfirmacao){
+            alert("Senha e confirmação não são iguais!!");
+            des_senha.focus();
+            return false;
+        }
 
-        $.post( "https://pwprojetoback-end.herokuapp.com/cliente/recuperar", { des_email : email } ).then(function(data) {
-            alert("Enviamos a você um email com um link para concluir a redefinição de sua senha !!!!");
-            window.location.href = "altera.html";
+        $.post( "https://pwprojetoback-end.herokuapp.com/cliente/resetar", { email : email, token : token, senha : senha } ).then(function(data) {
+            alert("A senha foi alterada com sucesso!!!!");
+            window.location.href = "login.html";
         }).catch(function(error) {
-            alert("Erro ao enviar email");
+            alert("Erro ao alterar a senha!!!!");
         });
-}    
+    }    
 
 var busca = document.getElementById('busca');
 
