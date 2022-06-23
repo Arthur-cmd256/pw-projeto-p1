@@ -83,19 +83,20 @@
         for (let produto of produtos){
             const { ind_destaque, img_produto } = produto;
             const img = img_produto.split("|")[0];
-                output += ` 
-                    <div id="cards" >
-                    <a href="detalhe.html?id=${produto._id}&token=${token}">
+            if (ind_destaque){
+                output += `
+                <div id="cards" >
+                    <a href="detalhe.html?id=${produto._id}">
                         <img id="imagem-produto" src="${img}" alt="">
                     </a>
                     <div id="descricao">
                         <h4>${produto.nom_produto}</h4>
-                        <button id="comprar" class="btn btn-secondary">
-                            Comprar agora
-                        </button>
+                        <a id="Ver Mais" class="btn btn-secondary" href="detalhe.html?id=${produto._id}">
+                            Ver Mais
+                        </a>
                     </div>
-                </div>
-                `;
+                </div>`;
+            }
         }
 
         document.querySelector('#produtos').innerHTML = output;
