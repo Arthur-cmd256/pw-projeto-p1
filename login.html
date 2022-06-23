@@ -61,6 +61,8 @@
 
 <script lang="javascript">
     
+    const token = sessionStorage.getItem("token");
+
     function login(){
 
         const email = document.getElementById("des_emaill").value;
@@ -81,8 +83,10 @@
         $.post( "https://pwprojetoback-end.herokuapp.com/cliente/login", { des_email : email, des_senha : senha } ).then(function(data) {
             if(data.status === "ok"){
                 alert("Login realizado com sucesso!!!");
-                const token = data.token;
-                window.location.href = "index.html?token="+token;
+                sessionStorage.setItem("token", data.token);
+                sessionStorage.setItem("clienteId", data.cliente._id);
+                sessionStorage.setItem("cestaId", data.cliente.cesta);
+                window.location.href = "index.html";
             }
         }).catch(function(error) {
             alert("Erro ao realizar o logar!!!");
@@ -100,13 +104,13 @@
 
     function getBusca() {
         const busca = document.querySelector('#busca').value;
-        window.location.href = `busca.html?name=${busca}&token=${token}`;
+        window.location.href = `busca.html?name=${busca}`;
     }
 
     function cesta () {
 
         if (token !== undefined) {
-            window.location.href = "cesta.html?token="+token;
+            window.location.href = "cesta.html";
         } else {
             alert("Para acessar a cesta, você precisa estar logado!");
             window.location.href = "login.html";

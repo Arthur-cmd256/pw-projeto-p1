@@ -50,24 +50,19 @@
 
 <script>
 
-    const url = window.location.href;
-
-    const token = url.split("token=")[1];
-
-    const atributos = url.split("=")[1];
-    
-    const id = atributos.split("&")[0];
+    const token = sessionStorage.getItem('token');
 
     const authorization = "Bearer " + token;
 
     async function getProdutos() {
 
+        const url =  window.location.href;
+
+        const id = url.split('id=')[1];
+
         try {
             const response = await fetch('https://pwprojetoback-end.herokuapp.com/produto/' + id);
-            //console.log(response);
             const data = await response.json();
-
-            //console.log(data);
             show(data);
         } catch (error) {
             console.log('errooouuuu');
@@ -78,7 +73,8 @@
 
     function show(produto) {
 
-        const { nom_produto, des_produto, val_produto, qtd_produto, img_produto, cat_produto, ind_destaque } = produto;
+        const { _id, nom_produto, des_produto, val_produto, qtd_produto, img_produto, cat_produto, ind_destaque } = produto;
+        sessionStorage.setItem('produtoId', _id);
         const img = img_produto.split("|");
         const val = String(val_produto).split(".");
 
@@ -156,17 +152,17 @@
     });
 
     async function comprar() {
-        if (token !== "undefined") {
-            
-            const response = await fetch('https://pwprojetoback-end.herokuapp.com/cesta/', { method: 'GET', headers: { 'Authorization': 'Bearer ' + token }});
+        if (token !== null) {
 
-            const data = await response.json();
+            const cestaId = sessionStorage.getItem('cestaId');
 
-            $.ajax({ url: "https://pwprojetoback-end.herokuapp.com/cesta/"+ data._id, type: "PUT", data: { produto: id }, beforeSend: function(xhr){xhr.setRequestHeader('Authorization', authorization)}})
+            const produtoId = sessionStorage.getItem('produtoId');
+
+            $.ajax({ url: "https://pwprojetoback-end.herokuapp.com/cesta/"+ cestaId, type: "PUT", data: { produto: produtoId }, beforeSend: function(xhr){xhr.setRequestHeader('Authorization', authorization)}})
 
             alert('Vamos para cesta!');
 
-            window.location.href = "cesta.html?token=" + token;
+            window.location.href = "cesta.html";
 
         } else {
             alert('Para comprar, você precisa estar logado');
@@ -176,13 +172,13 @@
     }
 
     async function adicionar() {
-        if (token !== "undefined") {
+        if (token !== null) {
 
-            const response = await fetch('https://pwprojetoback-end.herokuapp.com/cesta/', { method: 'GET', headers: { 'Authorization': 'Bearer ' + token }});
+            const cestaId = sessionStorage.getItem('cestaId');
 
-            const data = await response.json();
+            const produtoId = sessionStorage.getItem('produtoId');
 
-            $.ajax({ url: "https://pwprojetoback-end.herokuapp.com/cesta/"+ data._id, type: "PUT", data: { produto: id }, beforeSend: function(xhr){xhr.setRequestHeader('Authorization', authorization)}})
+            $.ajax({ url: "https://pwprojetoback-end.herokuapp.com/cesta/"+ cestaId, type: "PUT", data: { produto: produtoId }, beforeSend: function(xhr){xhr.setRequestHeader('Authorization', authorization)}})
 
             alert('Produto adicionado a cesta!');
         } else {
@@ -194,13 +190,13 @@
 
     function getBusca() {
         const busca = document.querySelector('#busca').value;
-        window.location.href = `busca.html?name=${busca}&token=${token}`;
+        window.location.href = `busca.html?name=${busca}`;
     }
 
     function cesta () {
 
-        if (token !== undefined) {
-            window.location.href = "cesta.html?token="+token;
+        if (token !== null) {
+            window.location.href = "cesta.html";
         } else {
             alert("Para acessar a cesta, você precisa estar logado!");
             window.location.href = "login.html";
@@ -209,11 +205,11 @@
     }
 
     function home () {
-        window.location.href = "index.html"+"?token="+token;
+        window.location.href = "index.html";
     }
     
     function login () {
-        window.location.href = "login.html"+"?token="+token;
+        window.location.href = "login.html";
     }
 
 

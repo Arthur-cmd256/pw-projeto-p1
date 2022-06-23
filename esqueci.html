@@ -59,10 +59,7 @@
 
 <script lang="javascript">
 
-    const url = window.location.href;
-
-    const token = url.split("token=")[1];
-
+    const token = sessionStorage.getItem("token");
 
     function esqueci(){
 
@@ -86,13 +83,13 @@ busca.addEventListener("keypress", function(evento){
 
 function getBusca() {
         const busca = document.querySelector('#busca').value;
-        window.location.href = `busca.html?name=${busca}&token=${token}`;
+        window.location.href = `busca.html?name=${busca}`;
     }
 
     function cesta () {
 
         if (token !== undefined) {
-            window.location.href = "cesta.html?token="+token;
+            window.location.href = "cesta.html";
         } else {
             alert("Para acessar a cesta, você precisa estar logado!");
             window.location.href = "login.html";
@@ -101,11 +98,11 @@ function getBusca() {
     }
 
     function home () {
-        window.location.href = "index.html"+"?token="+token;
+        window.location.href = "index.html";
     }
     
     function login () {
-        window.location.href = "login.html"+"?token="+token;
+        window.location.href = "login.html";
     }
 
 </script>

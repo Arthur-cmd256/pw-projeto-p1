@@ -47,14 +47,12 @@
 
 <script lang="javascript">
 
-    const url = window.location.href;
-
-    const token = url.split("token=")[1];
+    const token = sessionStorage.getItem("token");
 
     const authorization = "Bearer " + token;
 
     $.ajax({ url: "https://pwprojetoback-end.herokuapp.com/cesta/", type: "GET", beforeSend: function(xhr){xhr.setRequestHeader('Authorization', authorization);}}).then(function(data){
-        const { _id, qtd_itens, val_total, produtos } = data;
+        const { qtd_itens, val_total, produtos } = data;
 
         if (qtd_itens == 0) {
         
@@ -127,10 +125,10 @@
 
     
     async function limpar(){
-        const data = await $.ajax({ url: "https://pwprojetoback-end.herokuapp.com/cesta/", type: "GET", beforeSend: function(xhr){xhr.setRequestHeader('Authorization', authorization)}});
+        const cestaId = sessionStorage.getItem("cestaId");
 
-        $.ajax({ url: "https://pwprojetoback-end.herokuapp.com/cesta/limpa/" + data._id, type: "PUT", beforeSend: function(xhr){xhr.setRequestHeader('Authorization', authorization);}}).then(function(data){
-            window.location.href = "cesta.html?token=" + token;
+        $.ajax({ url: "https://pwprojetoback-end.herokuapp.com/cesta/limpa/" + cestaId, type: "PUT", beforeSend: function(xhr){xhr.setRequestHeader('Authorization', authorization);}}).then(function(data){
+            window.location.href = "cesta.html";
         }).catch(function(error){
             console.log(error);
         });
@@ -152,13 +150,13 @@
 
     function getBusca() {
         const busca = document.querySelector('#busca').value;
-        window.location.href = `busca.html?name=${busca}&token=${token}`;
+        window.location.href = `busca.html?name=${busca}`;
     }
 
     function cesta () {
 
         if (token !== undefined) {
-            window.location.href = "cesta.html?token="+token;
+            window.location.href = "cesta.html";
         } else {
             alert("Para acessar a cesta, você precisa estar logado!");
             window.location.href = "login.html";
@@ -167,11 +165,11 @@
     }
 
     function home () {
-        window.location.href = "index.html"+"?token="+token;
+        window.location.href = "index.html";
     }
     
     function login () {
-        window.location.href = "login.html"+"?token="+token;
+        window.location.href = "login.html";
     }
 
 </script>    

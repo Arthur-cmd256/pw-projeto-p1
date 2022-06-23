@@ -125,9 +125,7 @@
 
 <script lang="javascript">
 
-    const url = window.location.href;
-
-    const token = url.split("token=")[1];
+    const token = sessionStorage.getItem('token');
     
     async function cadastro() {
 
@@ -136,33 +134,33 @@
         const telefone = document.getElementById("num_telefone").value;
         const email = document.getElementById("des_email").value;
         const senha = document.getElementById("des_senha").value;
-        const senha1 = document.getElementById("senha1").value;
+        const senhaConfirmacao = document.getElementById("senha1").value;
         const endereco = document.getElementById("des_endereco").value;
 
         if(nome.length <= 3){
             alert("Informe seu nome completo!!!");
-            nome.focus();
+            nom_cliente.focus();
             return false;
         }
         if(cpf.length < 11){
             alert("Informe seu CPF completo!!!");
-            cpf.focus();
+            num_cpf.focus();
             return false;
         }
         if(email.length < 6 || email.indexOf("@") <=0 || email.lastIndexOf(".") <= email.indexOf("@")  ){
             alert("informe um email valido!!");
-            email.focus();
+            des_email.focus();
             return false;
         }
         
-        if(senha1.length < 5 || isNaN(senha1)){
+        if(senhaConfirmacao.length < 5 || isNaN(senhaConfirmacao)){
             alert("Informe uma senha alfanumerica de no minimo 6 caracteres!!!");
             senha1.focus();
             return false;
         }
-        if(senha1!=senha){
+        if(senha1!=senhaConfirmacao){
             alert("Senha e confirmação não são iguais!!");
-            senha.focus();
+            des_senha.focus();
             return false;
         }
 
@@ -189,13 +187,13 @@
 
     function getBusca() {
         const busca = document.querySelector('#busca').value;
-        window.location.href = `busca.html?name=${busca}&token=${token}`;
+        window.location.href = `busca.html?name=${busca}`;
     }
 
     function cesta () {
 
         if (token !== undefined) {
-            window.location.href = "cesta.html?token="+token;
+            window.location.href = "cesta.html";
         } else {
             alert("Para acessar a cesta, você precisa estar logado!");
             window.location.href = "login.html";
@@ -204,11 +202,11 @@
     }
 
     function home () {
-        window.location.href = "index.html"+"?token="+token;
+        window.location.href = "index.html";
     }
     
     function login () {
-        window.location.href = "login.html"+"?token="+token;
+        window.location.href = "login.html";
     }
 
 
