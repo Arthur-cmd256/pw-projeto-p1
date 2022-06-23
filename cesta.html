@@ -128,6 +128,7 @@
         const cestaId = sessionStorage.getItem("cestaId");
 
         $.ajax({ url: "https://pwprojetoback-end.herokuapp.com/cesta/limpa/" + cestaId, type: "PUT", beforeSend: function(xhr){xhr.setRequestHeader('Authorization', authorization);}}).then(function(data){
+            sessionStorage.setItem("cestaId", data.cestaId);
             window.location.href = "cesta.html";
         }).catch(function(error){
             console.log(error);
